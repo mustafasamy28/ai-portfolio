@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website showcasing AI engineering projects, skills, and professional experience. Features an intelligent hybrid chatbot powered by rule-based keyword matching and OpenAI GPT-4o-mini.
 
-![Portfolio Screenshot](public/Desktop.png)
+![Portfolio Screenshot](<img width="1920" height="863" alt="Screenshot (68)" src="https://github.com/user-attachments/assets/c835b962-90c8-46b6-9a3c-34cc0e29c5ef" />)
 
 ## 🌟 Features
 
