@@ -230,6 +230,7 @@ This project is private and personal. All rights reserved.
 - AI powered by OpenAI
 - Icons from React Icons
 - Animations by Framer Motion
+- Othman EL Hadrati
 
 ---
 
