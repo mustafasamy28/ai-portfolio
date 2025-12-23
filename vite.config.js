@@ -9,5 +9,15 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     // Vite automatically exposes VITE_* prefixed variables via import.meta.env
     // No need to manually define them - they're available automatically
+    build: {
+      sourcemap: false, // Disable sourcemaps to avoid sourcemap errors
+      rollupOptions: {
+        onwarn(warning, warn) {
+          // Suppress sourcemap warnings
+          if (warning.code === 'SOURCEMAP_ERROR') return;
+          warn(warning);
+        },
+      },
+    },
   };
 });
