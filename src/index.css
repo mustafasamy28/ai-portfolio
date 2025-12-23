@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Scrollbar styles */
+.scrollbar::-webkit-scrollbar {
+          width: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+          background: #222244;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+          background-color: #635ee3 ;
+          border-radius: 60px;
+}

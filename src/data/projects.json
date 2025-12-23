@@ -1,0 +1,46 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "serviceName": "AI Trading System",
+      "tools": [
+        "SiFastapi",
+        "FaPython",
+        "SiOpenaigym",
+        "FaDocker"
+      ],
+      "link": "https://github.com/mustafasamy28",
+      "imgUrl": "PortfolioChatBotArchi",
+      "project_type": "ai"
+    },
+    {
+      "id": 2,
+      "serviceName": "Intelligent FAQ Assistant with RAG",
+      "tools": [
+        "SiFastapi",
+        "SiLangchain",
+        "SiStreamlit",
+        "SiMongodb",
+        "FaDocker",
+        "BiLogoPostgresql",
+        "DiRedis"
+      ],
+      "link": "https://github.com/mustafasamy28",
+      "imgUrl": "ChatBot",
+      "project_type": "ai"
+    },
+    {
+      "id": 3,
+      "serviceName": "House Price Prediction System",
+      "tools": [
+        "SiScikitlearn",
+        "FaPython",
+        "SiStreamlit",
+        "SiFlask"
+      ],
+      "link": "https://github.com/mustafasamy28",
+      "imgUrl": "MedicalOffice",
+      "project_type": "data"
+    }
+  ]
+}

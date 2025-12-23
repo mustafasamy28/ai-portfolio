@@ -1,0 +1,143 @@
+{
+  "topics": {
+    "projects": {
+      "keywords": [
+        "project",
+        "projects",
+        "portfolio",
+        "work",
+        "build",
+        "built",
+        "developed",
+        "created",
+        "ai trading",
+        "trading system",
+        "rag",
+        "faq assistant",
+        "house price",
+        "prediction",
+        "machine learning",
+        "what have you built",
+        "what did you create",
+        "show me your work",
+        "tell me about your projects"
+      ],
+      "responses": [
+        "I've worked on several exciting projects! My main ones include:\n\n**AI Trading System** - An autonomous multi-agent trading platform with 4 AI traders using different investment strategies (value, macro, systematic, crypto). They manage $10K portfolios and execute 100+ trades daily with full audit trails.\n\n**Intelligent FAQ Assistant with RAG** - A production RAG system that handles 5,000+ queries daily with 92% accuracy. It reduced customer support costs by $250K annually and achieved 4.7/5 user satisfaction.\n\n**House Price Prediction System** - An ML pipeline achieving 92% prediction accuracy with $15K average error on $300K+ properties, processing valuations in under 2 seconds.\n\nWould you like details on any specific project?",
+        "I specialize in building production-ready AI and ML systems. My standout projects include:\n\n• **AI Trading System** - Multi-agent platform with autonomous traders\n• **RAG FAQ Assistant** - Enterprise-grade knowledge system handling 5K+ daily queries\n• **House Price Prediction** - ML model with 92% accuracy for real estate valuation\n\nEach project demonstrates end-to-end development from data to deployment. Which project interests you most?",
+        "I've built several production AI systems:\n\n**AI Trading System**: Autonomous multi-agent trading with 4 AI traders managing portfolios\n**RAG FAQ Assistant**: Enterprise support system with 92% accuracy, handling 5K+ queries/day\n**House Price Prediction**: ML model with 92% accuracy for property valuation\n\nAll projects are production-ready with full MLOps pipelines. Want to know more about any of them?"
+      ]
+    },
+    "skills": {
+      "keywords": [
+        "skill",
+        "skills",
+        "technology",
+        "technologies",
+        "tech stack",
+        "what can you do",
+        "what do you know",
+        "expertise",
+        "proficient",
+        "python",
+        "pytorch",
+        "tensorflow",
+        "llm",
+        "llms",
+        "langchain",
+        "rag",
+        "machine learning",
+        "ai",
+        "data science",
+        "programming",
+        "languages",
+        "frameworks",
+        "tools"
+      ],
+      "responses": [
+        "I'm an AI Engineer specializing in LLMs, agentic workflows, and applied machine learning. Here's my tech stack:\n\n**Programming Languages**: Python, SQL, JavaScript, TypeScript, C++, Java\n\n**AI/ML & LLMs**: PyTorch, TensorFlow, Scikit-learn, XGBoost, Hugging Face Transformers, OpenAI API, LangChain, RAG, Prompt Engineering, Multi-Agent Systems\n\n**Frontend**: React, Next.js, Tailwind CSS, Framer Motion, Streamlit, Gradio\n\n**Databases**: PostgreSQL, MongoDB, Redis, SQLite, Pinecone, FAISS, ChromaDB\n\n**Cloud & MLOps**: AWS, GCP, Azure, Vercel, Docker, MLflow, Git, CI/CD\n\n**Backend**: FastAPI, REST APIs, Model Deployment & Monitoring\n\nI build scalable AI systems covering the full lifecycle from data to deployment!",
+        "My expertise spans the full AI/ML stack:\n\n**Core Skills**:\n• LLMs & Agentic Systems (LangChain, RAG, Multi-Agent Workflows)\n• Deep Learning (PyTorch, TensorFlow)\n• Traditional ML (Scikit-learn, XGBoost)\n• MLOps (Docker, MLflow, CI/CD)\n\n**Languages**: Python (primary), SQL, JavaScript, TypeScript\n\n**Infrastructure**: AWS, GCP, Azure, Docker, FastAPI\n\nI focus on production-ready solutions, not just demos. What would you like to know more about?",
+        "I specialize in building production AI systems. My main skills:\n\n**AI/ML**: PyTorch, LLMs, RAG, LangChain, Multi-Agent Systems, Transformers\n**Languages**: Python, SQL, JavaScript, TypeScript\n**MLOps**: Docker, MLflow, CI/CD, Cloud (AWS/GCP/Azure)\n**Backend**: FastAPI, REST APIs\n**Frontend**: React, Streamlit, Gradio\n\nI build end-to-end solutions from data to deployment. Which area interests you?"
+      ]
+    },
+    "experience": {
+      "keywords": [
+        "experience",
+        "work",
+        "job",
+        "career",
+        "background",
+        "employment",
+        "worked",
+        "worked at",
+        "where have you worked",
+        "what companies",
+        "employment history",
+        "professional",
+        "freelance",
+        "mobica",
+        "invisible",
+        "meridian",
+        "mostaql"
+      ],
+      "responses": [
+        "I'm currently working as an **AI Engineer & LLM Specialist** (Freelance & Contract, 2025-Present), helping startups and businesses deploy production-ready AI solutions.\n\nI'm also an **AI Trainer & LLM Evaluator** at Meridian Marketplace (Invisible) since Oct 2025, improving LLM quality and reliability.\n\nPreviously, I was an **AI Engineer & Instructor at Mobica** (2024-2025), where I built production AI systems and mentored 50+ engineers.\n\nI've been a **Data Scientist** (Freelance, 2023-Present) delivering custom ML solutions across industries.\n\nBefore AI, I worked in Public Relations & Innovation (2019-2022), which helped me bridge business and technology effectively.",
+        "My experience spans AI engineering, data science, and education:\n\n**Current Roles**:\n• AI Engineer & LLM Specialist (Freelance, 2025-Present)\n• AI Trainer & LLM Evaluator at Meridian Marketplace (2025-Present)\n\n**Previous**:\n• AI Engineer & Instructor at Mobica (2024-2025) - Built production AI systems, mentored 50+ engineers\n• Data Scientist (Freelance, 2023-Present) - Custom ML solutions\n\nI focus on production-ready AI systems that solve real business problems. Want details on any role?",
+        "I've been building AI systems professionally since 2023:\n\n**Current**: AI Engineer (Freelance) + LLM Evaluator at Meridian Marketplace\n**2024-2025**: AI Engineer & Instructor at Mobica - mentored 50+ engineers\n**2023-Present**: Data Scientist (Freelance) - custom ML solutions\n\nI specialize in production-ready AI, not experimental code. All my work focuses on real business value. What would you like to know?"
+      ]
+    },
+    "contact": {
+      "keywords": [
+        "contact",
+        "email",
+        "reach",
+        "reach out",
+        "get in touch",
+        "how to contact",
+        "linkedin",
+        "github",
+        "social",
+        "social media",
+        "connect",
+        "hire",
+        "collaborate",
+        "work together",
+        "available",
+        "freelance",
+        "contract"
+      ],
+      "responses": [
+        "I'd love to connect! Here's how to reach me:\n\n**Email**: mustafasamy28@gmail.com\n\n**LinkedIn**: https://www.linkedin.com/in/mostafa-samy-9b95711a7/\n\n**GitHub**: https://github.com/mustafasamy28\n\nI'm available for freelance AI/ML projects, consulting, and collaborations. Feel free to reach out if you have an interesting project or just want to chat about AI!",
+        "You can reach me at:\n\n📧 **Email**: mustafasamy28@gmail.com\n🔗 **LinkedIn**: https://www.linkedin.com/in/mostafa-samy-9b95711a7/\n💻 **GitHub**: https://github.com/mustafasamy28\n\nI'm open to freelance work, consulting, and interesting AI/ML projects. Don't hesitate to get in touch!",
+        "Here's how to contact me:\n\n• **Email**: mustafasamy28@gmail.com\n• **LinkedIn**: https://www.linkedin.com/in/mostafa-samy-9b95711a7/\n• **GitHub**: https://github.com/mustafasamy28\n\nI'm available for AI/ML projects, consulting, and collaborations. Let's connect!"
+      ]
+    },
+    "general": {
+      "keywords": [
+        "hello",
+        "hi",
+        "hey",
+        "greetings",
+        "who are you",
+        "what do you do",
+        "tell me about yourself",
+        "introduce",
+        "introduction",
+        "about",
+        "bio",
+        "background",
+        "what is your name",
+        "who is mostafa",
+        "help",
+        "what can you help with",
+        "capabilities"
+      ],
+      "responses": [
+        "Hi! I'm Mostafa Samy's AI assistant. I can help you learn about his work as an AI Engineer and Data Scientist.\n\nI can tell you about:\n• His projects (AI Trading System, RAG FAQ Assistant, House Price Prediction)\n• His skills and technologies\n• His professional experience\n• How to contact him\n\nWhat would you like to know?",
+        "Hello! I'm here to help you learn about Mostafa Samy - an AI Engineer specializing in LLMs, agentic workflows, and production ML systems.\n\nI can answer questions about his projects, skills, experience, and how to get in touch. Feel free to ask anything!",
+        "Hey there! I'm Mostafa's portfolio assistant. Mostafa is an AI Engineer & Data Scientist based in Cairo, Egypt, building production-ready AI solutions.\n\nAsk me about his projects, skills, experience, or contact info. How can I help?"
+      ]
+    }
+  },
+  "fallback": "I don't have a specific answer for that, but I can help you learn about Mostafa's projects, skills, experience, or contact information. What would you like to know?"
+}

@@ -1,0 +1,107 @@
+{
+  "experiences": [
+    {
+      "id": 1,
+      "position": "AI Engineer & LLM Specialist",
+      "company": "Freelance & Contract",
+      "jobType": "Freelance",
+      "location": "Cairo, Egypt · Remote",
+      "duration": "2025 – Present",
+      "durationShort": "Ongoing",
+      "description": "I help startups, founders, and businesses design and deploy production-ready AI solutions that solve real problems—not just demos.",
+      "responsibilities": [
+        "Built and delivered end-to-end AI systems including LLM-powered chatbots, RAG knowledge systems, predictive models, and intelligent automation tools",
+        "Designed scalable pipelines covering data preparation, model training, evaluation, deployment, and monitoring",
+        "Applied NLP and LLM techniques for text analysis, summarization, classification, and decision support",
+        "Translated business requirements into clear AI architectures and communicated results to non-technical stakeholders",
+        "Focused on reliability, performance, and real business value—not experimental code"
+      ],
+      "tools": [
+        "Python",
+        "PyTorch",
+        "Hugging Face",
+        "LangChain",
+        "FastAPI",
+        "Docker",
+        "MLflow"
+      ],
+      "certification": "",
+      "type": "ai"
+    },
+    {
+      "id": 2,
+      "position": "AI Trainer & LLM Evaluator",
+      "company": "Meridian Marketplace (Invisible)",
+      "jobType": "Contract",
+      "location": "Remote",
+      "duration": "Oct 2025 – Present",
+      "durationShort": "Ongoing",
+      "description": "Contributed to improving the quality and reliability of large language model systems.",
+      "responsibilities": [
+        "Trained and evaluated LLMs to enhance reasoning, accuracy, and real-world task performance",
+        "Optimized prompts, curated datasets, and provided structured feedback for model improvement",
+        "Ensured AI outputs aligned with production and user expectations"
+      ],
+      "tools": [
+        "Python",
+        "LLM Evaluation",
+        "Prompt Engineering"
+      ],
+      "certification": "",
+      "type": "ai"
+    },
+    {
+      "id": 3,
+      "position": "AI Engineer & Instructor",
+      "company": "Mobica",
+      "jobType": "Full-time",
+      "location": "Cairo, Egypt",
+      "duration": "2024 – 2025",
+      "durationShort": "1 year",
+      "description": "Worked at the intersection of real-world AI development and education, delivering production-grade solutions while mentoring future engineers.",
+      "responsibilities": [
+        "Built and deployed computer vision and LLM-based applications for real business use cases",
+        "Designed intelligent systems using transformers, OpenCV, and modern NLP pipelines",
+        "Introduced MLOps best practices (Docker, MLflow, Git) to ensure scalable and maintainable AI systems",
+        "Mentored 50+ engineers and data professionals on building deployable AI products"
+      ],
+      "tools": [
+        "Python",
+        "PyTorch",
+        "OpenCV",
+        "Transformers",
+        "Docker",
+        "MLflow",
+        "Git"
+      ],
+      "certification": "",
+      "type": "ai"
+    },
+    {
+      "id": 4,
+      "position": "Data Scientist",
+      "company": "Freelance Platforms (Mostaql & Direct Clients)",
+      "jobType": "Freelance",
+      "location": "Cairo, Egypt · Remote",
+      "duration": "2023 – Present",
+      "durationShort": "2+ years",
+      "description": "Delivered custom data science and machine learning solutions across different industries.",
+      "responsibilities": [
+        "Built predictive models for forecasting, classification, and optimization",
+        "Performed deep data analysis to extract actionable insights, not just charts",
+        "Developed NLP solutions for analyzing unstructured text data",
+        "Supported clients from idea to deployment with clear communication and documentation"
+      ],
+      "tools": [
+        "Python",
+        "Scikit-learn",
+        "XGBoost",
+        "Pandas",
+        "NumPy",
+        "SQL"
+      ],
+      "certification": "",
+      "type": "data"
+    }
+  ]
+}
