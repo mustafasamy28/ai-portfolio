@@ -1,5 +1,9 @@
 /**
  * Keyword matching utility for rule-based chatbot responses
+ * 
+ * DEPRECATED: This file is no longer used. The chatbot now uses OpenAI GPT-4o-mini exclusively.
+ * Kept for reference only - rule-based system has been commented out in api/chat.js and api/voice-chat.js
+ * 
  * Returns the best matching response from the rule-based data, or null if no match found
  */
 

@@ -1,12 +1,12 @@
 /**
  * Vercel Serverless Function: Voice Chat Endpoint
- * Handles voice messages by transcribing with OpenAI Whisper, then processing same as text chat
+ * Handles voice messages by transcribing with OpenAI Whisper, then processing with OpenAI GPT-4o-mini
+ * Rule-based system has been commented out - all requests go directly to OpenAI
  */
 
-// Import the same matching logic and responses data from chat.js
-// For serverless functions, we'll embed it again (or could be shared module)
-
-// Embedded responses data (same as chat.js)
+// Rule-based system commented out - all requests now go to OpenAI GPT-4o-mini
+// Embedded responses data (deprecated - kept for reference)
+/*
 const responsesData = {
   topics: {
     projects: {
@@ -151,8 +151,10 @@ const responsesData = {
   fallback:
     "I don't have a specific answer for that, but I can help you learn about Mostafa's projects, skills, experience, or contact information. What would you like to know?",
 };
+*/
 
-// Embedded keyword matching logic (same as chat.js)
+// Embedded keyword matching logic (deprecated - kept for reference)
+/*
 function normalizeInput(text) {
   if (!text || typeof text !== 'string') return '';
   return text
@@ -232,9 +234,20 @@ function matchKeywordResponse(userInput, responsesData) {
 
   return null;
 }
+*/
 
-// System prompt for OpenAI (same as chat.js)
-const SYSTEM_PROMPT = `You are Mostafa Samy's portfolio assistant. Answer questions about his:
+// Enhanced system prompt for OpenAI GPT-4o-mini with comprehensive personal details
+const SYSTEM_PROMPT = `You are Mostafa Samy's portfolio assistant. Answer questions about him naturally and conversationally.
+
+**Basic Info:**
+- Age: 26
+- Location: Cairo, Egypt
+- Languages: Arabic (native), English (professional)
+
+**Professional Focus:**
+- AI Engineer specializing in LLMs, AI Agents, RAG, model fine-tuning
+- Background in applied AI projects, chatbot development, production systems
+- Strong interest in Machine Learning, LLMs, Data Engineering, BI
 
 **Projects:**
 - AI Trading System: Multi-agent autonomous trading platform with 4 AI traders
@@ -242,7 +255,7 @@ const SYSTEM_PROMPT = `You are Mostafa Samy's portfolio assistant. Answer questi
 - House Price Prediction: ML pipeline with 92% prediction accuracy
 
 **Skills:**
-Python, PyTorch, LLMs, RAG, MLOps, Hugging Face, LangChain, FastAPI, Docker, React
+Python, PyTorch, LLMs, RAG, MLOps, Hugging Face, LangChain, FastAPI, Docker, React, Data Engineering, BI
 
 **Experience:**
 - AI Engineer & LLM Specialist (Freelance, 2025-Present)
@@ -250,13 +263,41 @@ Python, PyTorch, LLMs, RAG, MLOps, Hugging Face, LangChain, FastAPI, Docker, Rea
 - AI Engineer & Instructor at Mobica (2024-2025)
 - Data Scientist (Freelance, 2023-Present)
 
+**Hobbies & Interests:**
+- Working with AI and language models (even for fun)
+- Building chatbots, exploring data engineering and BI concepts
+- Reading about real-world AI applications, tech trends
+- System design and business ideas mixing tech with real markets
+- Meaningful conversations and professional self-improvement
+- Going to the gym, lifting weights, staying physically active
+- Listening to music during workouts, using gym time to reset
+- Reading, watching tech-adjacent content
+- Coffee enthusiast
+
+**Personality & Values:**
+- Constant learner, curious by nature
+- Allergic to vague requirements
+- Prefers clear goals, hates vague plans
+- Enjoys simple routines
+- Believes consistency beats motivation
+- Values clarity, responsibility
+- Believes in deeply understanding the problem before touching the solution
+- Enjoys turning complex AI concepts into simple explanations
+- Strongly dislikes vague prompts
+- Believes prompt engineering is a real superpower
+- Believes good prompts can save lives (or at least deadlines)
+
 **Contact:**
 Email: mustafasamy28@gmail.com
 LinkedIn: https://www.linkedin.com/in/mostafa-samy-9b95711a7/
 GitHub: https://github.com/mustafasamy28
-Location: Cairo, Egypt
 
-Keep responses under 150 words. Be professional and friendly.`;
+**Response Style:**
+- Keep responses under 150 words
+- Be professional, friendly, and conversational
+- Show personality when appropriate
+- Reference hobbies/interests naturally when relevant
+- Be authentic to Mostafa's voice and values`;
 
 const MAX_MESSAGES_PER_DAY = 5;
 
@@ -410,28 +451,30 @@ export default async function handler(req, res) {
       });
     }
 
-    // 4. Process transcription through same logic as text chat
-    const keywordMatch = matchKeywordResponse(transcription.trim(), responsesData);
+    // 4. Process transcription with OpenAI GPT-4o-mini
+    // Rule-based system commented out - all requests go directly to OpenAI
+    // const keywordMatch = matchKeywordResponse(transcription.trim(), responsesData);
+    // let chatResponse;
+    // let source;
+    // if (keywordMatch && keywordMatch.confidence >= 0.3) {
+    //   chatResponse = keywordMatch.response;
+    //   source = 'rule-based';
+    // } else {
+    //   chatResponse = await callOpenAI(transcription.trim());
+    //   source = 'openai';
+    // }
 
     let chatResponse;
     let source;
 
-    if (keywordMatch && keywordMatch.confidence >= 0.3) {
-      // Rule-based response found
-      chatResponse = keywordMatch.response;
-      source = 'rule-based';
-    } else {
-      // Fallback to OpenAI
-      try {
-        chatResponse = await callOpenAI(transcription.trim());
-        source = 'openai';
-      } catch (openaiError) {
-        console.error('OpenAI API error:', openaiError);
-        chatResponse =
-          responsesData.fallback ||
-          'I apologize, but I encountered an error processing your request. Please try again later.';
-        source = 'rule-based';
-      }
+    try {
+      chatResponse = await callOpenAI(transcription.trim());
+      source = 'openai';
+    } catch (openaiError) {
+      console.error('OpenAI API error:', openaiError);
+      chatResponse =
+        'I apologize, but I encountered an error processing your request. Please try again later.';
+      source = 'error';
     }
 
     const remaining = MAX_MESSAGES_PER_DAY - messageCount - 1;

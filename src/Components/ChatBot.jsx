@@ -32,6 +32,8 @@ import {
   getRateLimitStatus,
 } from '../utils/rateLimiter';
 
+const MAX_MESSAGE_LENGTH = 1000;
+
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasStartedChat, setHasStartedChat] = useState(false);
@@ -53,6 +55,9 @@ export default function ChatBot() {
 
   // Rate limiting state
   const [remainingMessages, setRemainingMessages] = useState(5);
+
+  // Persistent session ID for conversation tracking
+  const [sessionId] = useState(() => 'session-' + Date.now());
 
   const chatRequest = async () => {
     if (!input.trim() || isSending) return;
@@ -111,7 +116,7 @@ export default function ChatBot() {
       const response = await Promise.race([
         API.post('/api/chat', {
           question: currentInput,
-          sessionId: 'session-' + Date.now(), // Simple session ID
+          sessionId: sessionId, // Use persistent session ID
           messageCount: messageCount,
         }),
         timeoutPromise,
@@ -144,7 +149,9 @@ export default function ChatBot() {
         ];
       });
     } catch (error) {
-      console.error('Error fetching ', error);
+      if (import.meta.env.DEV) {
+        console.error('Error fetching chat response:', error);
+      }
 
       setMessages(prev => {
         const updatedMessages = [...prev];
@@ -220,7 +227,7 @@ export default function ChatBot() {
 
     // Get current message count for API
     const rateLimitStatus = getRateLimitStatus();
-    formData.append('sessionId', 'session-' + Date.now());
+    formData.append('sessionId', sessionId); // Use persistent session ID
     formData.append('messageCount', rateLimitStatus.count.toString());
 
     // Create URL for audio playback
@@ -283,7 +290,9 @@ export default function ChatBot() {
         },
       ]);
     } catch (error) {
-      console.error('Error sending voice message:', error);
+      if (import.meta.env.DEV) {
+        console.error('Error sending voice message:', error);
+      }
 
       let errorMessage = 'Sorry, there was an error processing your voice message.';
 
@@ -361,11 +370,13 @@ export default function ChatBot() {
 
       recorder.onstop = () => {
         const audioBlob = new Blob(audioChunks, { type: mimeType });
-        console.log('Audio blob created:', {
-          size: audioBlob.size,
-          type: audioBlob.type,
-          chunks: audioChunks.length,
-        });
+        if (import.meta.env.DEV) {
+          console.log('Audio blob created:', {
+            size: audioBlob.size,
+            type: audioBlob.type,
+            chunks: audioChunks.length,
+          });
+        }
         sendVoiceMessage(audioBlob);
         stream.getTracks().forEach(track => track.stop());
       };
@@ -374,7 +385,9 @@ export default function ChatBot() {
       setIsRecording(true);
       recorder.start(100); // Collect data every 100ms
     } catch (error) {
-      console.error('Error accessing microphone:', error);
+      if (import.meta.env.DEV) {
+        console.error('Error accessing microphone:', error);
+      }
       alert('Unable to access microphone. Please check your permissions.');
     }
   };
@@ -529,7 +542,9 @@ export default function ChatBot() {
         setCurrentTime(0);
         setIsLoading(false);
         setIsPlaying(false);
-        console.error('Audio loading error for message:', messageId);
+        if (import.meta.env.DEV) {
+          console.error('Audio loading error for message:', messageId);
+        }
       };
 
       audio.addEventListener('loadedmetadata', handleLoadedMetadata);
@@ -563,18 +578,24 @@ export default function ChatBot() {
         }
 
         try {
-          console.log('Attempting to play audio:', {
-            src: audio.src,
-            duration: audio.duration,
-            readyState: audio.readyState,
-          });
+          if (import.meta.env.DEV) {
+            console.log('Attempting to play audio:', {
+              src: audio.src,
+              duration: audio.duration,
+              readyState: audio.readyState,
+            });
+          }
 
           await audio.play();
           setIsPlaying(true);
           setCurrentPlayingId(messageId);
-          console.log('Audio started playing successfully');
+          if (import.meta.env.DEV) {
+            console.log('Audio started playing successfully');
+          }
         } catch (error) {
-          console.error('Error playing audio:', error);
+          if (import.meta.env.DEV) {
+            console.error('Error playing audio:', error);
+          }
           setIsPlaying(false);
         }
       }
@@ -751,6 +772,7 @@ export default function ChatBot() {
           }}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
+          aria-label="Open AI assistant chat"
           className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -857,6 +879,7 @@ export default function ChatBot() {
                     <div className="relative settings-dropdown">
                       <button
                         onClick={() => setShowSettings(!showSettings)}
+                        aria-label="Chat settings"
                         className="text-white/80 hover:text-white transition-all duration-200 p-2 rounded-full hover:bg-white/20 hover:scale-105"
                         title="Chat settings"
                       >
@@ -941,6 +964,7 @@ export default function ChatBot() {
                       setShowTooltip(false);
                       setIsHovering(false);
                     }}
+                    aria-label="Close chat"
                     className="text-white/80 hover:text-white transition-colors p-2 rounded-full hover:bg-white/20"
                     whileHover={{ rotate: 90 }}
                     transition={{ duration: 0.2 }}
@@ -1217,7 +1241,11 @@ export default function ChatBot() {
                 <div className="flex-1 relative">
                   <textarea
                     value={input}
-                    onChange={e => setInput(e.target.value)}
+                    onChange={e => {
+                      if (e.target.value.length <= MAX_MESSAGE_LENGTH) {
+                        setInput(e.target.value);
+                      }
+                    }}
                     onKeyDown={handleKeyPress}
                     placeholder={
                       hasStartedChat
@@ -1226,6 +1254,9 @@ export default function ChatBot() {
                     }
                     disabled={isSending}
                     rows={1}
+                    maxLength={MAX_MESSAGE_LENGTH}
+                    aria-label="Chat message input"
+                    aria-describedby="char-count"
                     className="w-full bg-gray-800/60 text-gray-100 placeholder-gray-400 placeholder:text-xs md:placeholder:text-sm placeholder:mt-2 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary1 focus:border-transparent disabled:opacity-50 resize-none overflow-hidden border border-primary4/50 backdrop-blur-sm transition-all duration-300 hover:border-primary1/60 pt-2.5 md:pt-3 pb-2 pl-2 pr-10 md:pr-12 text-sm md:text-base"
                     onInput={e => {
                       e.target.style.height = 'auto';
@@ -1233,11 +1264,24 @@ export default function ChatBot() {
                         Math.min(e.target.scrollHeight, 120) + 'px';
                     }}
                   />
+                  {input.length > MAX_MESSAGE_LENGTH * 0.8 && (
+                    <div
+                      id="char-count"
+                      className={`absolute bottom-0 right-2 text-xs ${
+                        input.length >= MAX_MESSAGE_LENGTH
+                          ? 'text-red-400'
+                          : 'text-gray-400'
+                      }`}
+                    >
+                      {input.length}/{MAX_MESSAGE_LENGTH}
+                    </div>
+                  )}
 
                   {/* Send button inside input */}
                   <motion.button
                     onClick={chatRequest}
-                    disabled={!input.trim() || isSending}
+                    disabled={!input.trim() || isSending || input.length > MAX_MESSAGE_LENGTH}
+                    aria-label="Send message"
                     className="absolute right-2 top-[0.30rem] bg-gradient-to-r from-primary1 via-primary2 to-primary3 text-white p-1.5 md:p-2 rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-shad shadow-lg group"
                     whileTap={{ scale: 0.95 }}
                   >
@@ -1259,6 +1303,7 @@ export default function ChatBot() {
                   <motion.button
                     onClick={isRecording ? stopRecording : startRecording}
                     disabled={isSending}
+                    aria-label={isRecording ? 'Stop recording' : 'Start voice recording'}
                     className={`absolute p-1.5 md:p-2 -right-10 md:-right-12 top-[0.4rem] rounded-full transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed group ${
                       isRecording
                         ? 'bg-red-500 text-white shadow-lg shadow-red-500/30 hover:bg-red-600'

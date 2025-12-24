@@ -7,11 +7,9 @@ import { BiCommentError } from 'react-icons/bi';
 import { PiWarningCircleFill } from 'react-icons/pi';
 import { FiX } from 'react-icons/fi';
 import { AnimatePresence, motion } from 'framer-motion';
-import ReCAPTCHA from 'react-google-recaptcha';
 import { trackFormSubmitted } from '../utils/analytics';
 
 const NOTIFICATION_TTL = 5000;
-const PUBLIC_kEY = '6LenvhQqAAAAAPlAG2EoXWetFNLXhIn-jwjf3_gp';
 
 const Form = () => {
   const form = useRef();
@@ -26,10 +24,10 @@ const Form = () => {
     message: false,
   });
   const [userSub, setUserSub] = useState(false);
-  const [capVal, setCapVal] = useState(null);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [send, setSend] = useState('Send Message!');
   const [errorNotif, setErrorNotif] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [focus, setFocus] = useState({
     username: false,
@@ -114,6 +112,8 @@ const Form = () => {
 
   const sub = e => {
     e.preventDefault();
+    if (isSubmitting) return; // Prevent multiple submissions
+    
     if (
       !errors.username &&
       errors.email === '' &&
@@ -122,11 +122,10 @@ const Form = () => {
       userName.trim() !== '' &&
       userEmail.trim() !== '' &&
       userSubject.trim() !== '' &&
-      userText.trim() !== '' &&
-      capVal != null
+      userText.trim() !== ''
     ) {
+      setIsSubmitting(true);
       setSend('Sending...');
-      setTimeout(() => setSend('Send Message!'), 1000);
       emailjs
         .sendForm(
           String(import.meta.env.VITE_REACT_APP_SERVICE_ID),
@@ -138,17 +137,23 @@ const Form = () => {
         )
         .then(
           () => {
-            // console.log('SUCCESS!');
             trackFormSubmitted('contact_form');
             reset();
             setIsNotifOpen(true);
             setErrorNotif(false);
+            setSend('Send Message!');
           },
           error => {
             setErrorNotif(true);
-            console.log('FAILED...', error.text);
+            setSend('Send Message!');
+            if (import.meta.env.DEV) {
+              console.error('EmailJS error:', error.text);
+            }
           },
-        );
+        )
+        .finally(() => {
+          setIsSubmitting(false);
+        });
     } else {
       setUserSub(true);
     }
@@ -165,7 +170,6 @@ const Form = () => {
     setUserEmail('');
     setUserSubject('');
     setUserText('');
-    setCapVal(null);
     setUserSub(false);
   };
 
@@ -251,7 +255,7 @@ const Form = () => {
               value={userEmail}
               onChange={e => handleChange(e, setUserEmail, 'email')}
               name="user_email"
-              type="text"
+              type="email"
               onFocus={() => handleFocus('email')}
               onBlur={() => handleBlur('email')}
               className={`border-b border-gray-300 py-1 focus:border-b-2 focus:border-primary2  transition-colors focus:outline-none peer bg-inherit w-full ${
@@ -342,17 +346,6 @@ const Form = () => {
           )}
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: 100, filter: 'blur(10px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 0.7 }}
-        >
-          <ReCAPTCHA
-            sitekey={PUBLIC_kEY}
-            onChange={capVal => setCapVal(capVal)}
-            theme="dark"
-          />
-        </motion.div>
-        <motion.div
           className="flex justify-start space-x-7 mt-4"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -364,12 +357,22 @@ const Form = () => {
         >
           <motion.button
             type="submit"
-            className="bg-gradient-to-r from-primary1 to-primary2 hover:from-primary2 hover:to-primary3 text-white font-bold px-8 py-3 rounded-lg border-2 border-primary1 shadow-shad hover:shadow-primary3 hover:border-primary3 transition-all duration-300 hover:scale-105 active:scale-95 min-w-[140px]"
+            disabled={isSubmitting}
+            aria-label="Send contact form message"
+            className={`bg-gradient-to-r from-primary1 to-primary2 hover:from-primary2 hover:to-primary3 text-white font-bold px-8 py-3 rounded-lg border-2 border-primary1 shadow-shad hover:shadow-primary3 hover:border-primary3 transition-all duration-300 hover:scale-105 active:scale-95 min-w-[140px] ${
+              isSubmitting ? 'opacity-50 cursor-not-allowed hover:scale-100' : ''
+            }`}
           >
             {send}
           </motion.button>
           <div className="max-w-32 hover:ring hover:ring-primary3 bg-primary2 font-bold  shadow-shad hover:shadow-primary3 rounded-lg items-center justify-center flex border-primary2 hover:bg-primary4 text-primary5 hover:text-white duration-300 cursor-pointer active:scale-[0.98]">
-            <button type="reset" onClick={reset} className="px-7 py-2">
+            <button 
+              type="reset" 
+              onClick={reset} 
+              disabled={isSubmitting}
+              aria-label="Reset contact form"
+              className="px-7 py-2"
+            >
               Reset
             </button>
           </div>

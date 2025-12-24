@@ -30,7 +30,9 @@ function getRateLimitData() {
       };
     }
   } catch (error) {
-    console.error('Error reading rate limit data:', error);
+    if (import.meta.env.DEV) {
+      console.error('Error reading rate limit data:', error);
+    }
   }
   
   return {
@@ -47,7 +49,9 @@ function saveRateLimitData(data) {
   try {
     localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(data));
   } catch (error) {
-    console.error('Error saving rate limit data:', error);
+    if (import.meta.env.DEV) {
+      console.error('Error saving rate limit data:', error);
+    }
   }
 }
 

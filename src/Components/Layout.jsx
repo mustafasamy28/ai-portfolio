@@ -37,7 +37,7 @@ export default function Layout() {
           <img
             className="fixed -right-24 md:right-0 top-0 h-full w-auto "
             src={Fragment1}
-            alt="error"
+            alt="Decorative background element"
           />
 
           <div className="relative w-full h-full flex justify-end flex-col-reverse md:flex-row items-center pb-24 md:pb-0 overflow-hidden cursor-custom">
